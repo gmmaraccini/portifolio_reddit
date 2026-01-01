@@ -1,59 +1,68 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Entendido. Aqui está o mesmo texto, mas formatado como texto simples (sem os códigos do Markdown), pronto para você copiar e colar onde precisar (no corpo do LinkedIn, na descrição do YouTube ou em um arquivo de texto comum):
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
 
-## About Laravel
+TITULO DO PROJETO: Reddit Clone - Laravel 12
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+RESUMO
+Este é um projeto de portfólio desenvolvido para demonstrar habilidades avançadas em modelagem de dados e recursividade utilizando o framework Laravel 12. O objetivo foi criar uma plataforma de discussões onde os comentários podem ter "n" níveis de profundidade (respostas de respostas), similar ao funcionamento do Reddit.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+LINKS DO PROJETO
+Código Fonte (GitHub): [https://github.com/gmmaraccini/portifolio_reddit](https://www.google.com/search?q=https://github.com/gmmaraccini/portifolio_reddit)
+Demonstração em Vídeo: [https://youtu.be/ylr3MXc2DvA](https://youtu.be/ylr3MXc2DvA)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+TECNOLOGIAS UTILIZADAS
 
-## Learning Laravel
+* Backend: Laravel 12 (PHP 8.2+)
+* Banco de Dados: MySQL
+* Frontend: Blade Templates + Tailwind CSS
+* Interatividade: Alpine.js (para gestão de estado nos formulários de resposta)
+* Autenticação: Laravel Breeze (Customizado)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+PRINCIPAIS DESAFIOS E SOLUÇÕES
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. Comentários Recursivos (Nested Comments)
+   O Desafio: Criar um sistema onde um comentário pode responder a outro infinitamente, sem causar problemas de performance ou complexidade excessiva no código.
 
-## Laravel Sponsors
+A Solução:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+* Database: Utilização de auto-relacionamento na tabela 'comments' (coluna parent_id).
+* Backend: Uso de Eager Loading aninhado para otimizar as consultas e carregar a árvore de uma vez.
+* Frontend: Criação de um Componente Blade Recursivo. O componente verifica se há respostas e "chama a si mesmo", gerando a visualização em escada automaticamente.
 
-### Premium Partners
+2. Customização do Fluxo de Autenticação
+   O Desafio: O Laravel Breeze redireciona nativamente para um Dashboard fechado, o que quebra a experiência de um fórum público.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+A Solução:
 
-## Contributing
+* Refatoração dos Controllers de Auth para redirecionar o usuário diretamente para a Timeline (Home) após login ou registro.
+* Adaptação do layout para ocupar a largura total da tela (Desktop).
+* Substituição do link "Dashboard" por um botão de "Sair" direto no cabeçalho.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+ESTRUTURA DO BANCO DE DADOS (Tabela Comments)
 
-## Code of Conduct
+* id: Identificador único
+* user_id: Quem fez o comentário
+* post_id: A qual post pertence
+* parent_id: O Segredo (Aponta para o ID de outro comentário Pai, permitindo a recursividade)
+* body: Conteúdo do texto
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+COMO RODAR O PROJETO LOCALMENTE
 
-## Security Vulnerabilities
+1. Clone o repositório:
+   git clone [https://github.com/gmmaraccini/portifolio_reddit.git](https://github.com/gmmaraccini/portifolio_reddit.git)
+2. Instale as dependências:
+   composer install
+   npm install && npm run build
+3. Configure o ambiente:
+   Copie o arquivo .env.example para .env e configure suas credenciais de banco de dados (MySQL).
+4. Gere a chave e rode as migrations com seeds:
+   (Este comando cria o banco, as tabelas e popula com dados falsos e hierarquia de comentários para teste)
+   php artisan key:generate
+   php artisan migrate:fresh --seed
+5. Inicie o servidor:
+   php artisan serve
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Desenvolvido por Gabriel Maraccini.
